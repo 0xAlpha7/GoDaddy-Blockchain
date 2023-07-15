@@ -7,6 +7,7 @@ contract goDaddy is ERC721 {
     uint256 public max_supply;
     uint256 public total_supply;
     address owner;
+    string public name1 = "Domain";
 
     struct Domain {
         string name;
