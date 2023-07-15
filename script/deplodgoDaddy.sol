@@ -7,11 +7,13 @@ import {HelperConfig} from "./HelperConfig.s.sol";
 
 
 contract DeploygoDaddy is Script {
+    string constant NAME = "goDaddy";
+    string constant SYMBOL = "GG";
     function run() external returns (goDaddy) {
         // HelperConfig helperConfig =  new HelperConfig();
         // string memory ethUsdPriceFeed  = helperConfig.activeNetworkConfig();
         vm.startBroadcast();
-        goDaddy godaddy = new goDaddy("goDaddy", "GG");
+        goDaddy godaddy = new goDaddy(NAME, SYMBOL);
         vm.stopBroadcast();   
         return (godaddy);
     }
