@@ -1,50 +1,50 @@
-// // SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 
-// pragma solidity ^0.8.18;
-// import {Script} from "forge-std/Script.sol";
+pragma solidity ^0.8.18;
+import {Script} from "forge-std/Script.sol";
 
 
-// contract HelperConfig is Script{
+contract HelperConfig is Script{
    
-//     NetworkConfig public activeNetworkConfig;
+    NetworkConfig public activeNetworkConfig;
 
-//     constructor() {
-//         if(block.chainid == 11155111){
-//             activeNetworkConfig = getSepoliaEthConfig();
-//         }
-//         else if(block.chainid == 1) {
-//             activeNetworkConfig = getMainnetEthConfig();
-           
-//         }
-//         else{
-//             activeNetworkConfig = getOrCreateAnvilEthConfig();
-//         }
-//     }
-//     struct NetworkConfig {
-//         address goDaaddyAddress;
-//     }
+    constructor() {
+        if(block.chainid == 11155111){
+            activeNetworkConfig = getSepoliaEthConfig();
+        }
+        else if(block.chainid == 1){
+            activeNetworkConfig = getMainnetEthConfig();
+        }
+        // else{
+        //     activeNetworkConfig = getOrCreateAnvilEthConfig();
+        // }
+    }
+    struct NetworkConfig {
+        string _name;
+        string _symbol;
+    }
 
-//     function getSepoliaEthConfig() public pure returns(NetworkConfig memory) {
-//         NetworkConfig memory sepoliaConfig = NetworkConfig();
-//         return sepoliaConfig; 
-//     }
+    function getSepoliaEthConfig() public pure returns(NetworkConfig memory) {
+        NetworkConfig memory sepoliaConfig = NetworkConfig("goDaddy", "GG");
+        return sepoliaConfig; 
+    }
 
-//     function getMainnetEthConfig() public pure returns(NetworkConfig memory) {
-//         NetworkConfig memory ethConfig = NetworkConfig();
-//         return ethConfig; 
-//     }
-//     function getOrCreateAnvilEthConfig() public  returns(NetworkConfig memory) {
-//         if(activeNetworkConfig.priceFeed != address(0)){
-//             return activeNetworkConfig;
-//         }
+    function getMainnetEthConfig() public pure returns(NetworkConfig memory) {
+        NetworkConfig memory ethConfig = NetworkConfig("goDaddy", "GG");
+        return ethConfig; 
+    }
+    // function getOrCreateAnvilEthConfig() public  returns(NetworkConfig memory) {
+    //     if(activeNetworkConfig.priceFeed != address(0)){
+    //         return activeNetworkConfig;
+    //     }
 
-//         //deploy the mock
-//         //return the mock address
+    //     // deploy the mock
+    //     // return the mock address
 
-//         // vm.startBroadcast();
-//         // // MockV3Aggregator mockPriceFeed = new MockV3Aggregator(DECIMALS, INITTIAL_PRICE );
-//         // vm.stopBroadcast();
-//         // // NetworkConfig memory anvilConfig = NetworkConfig({priceFeed: address(mockPriceFeed)});
-//         // return anvilConfig;
-//     }
-// }
+    //     vm.startBroadcast();
+    //     // MockV3Aggregator mockPriceFeed = new MockV3Aggregator(DECIMALS, INITTIAL_PRICE );
+    //     vm.stopBroadcast();
+    //     // NetworkConfig memory anvilConfig = NetworkConfig({priceFeed: address(mockPriceFeed)});
+    //     return anvilConfig;
+    // }
+}
