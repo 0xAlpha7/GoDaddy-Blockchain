@@ -5,6 +5,8 @@ import {Script} from "forge-std/Script.sol";
 
 
 contract HelperConfig is Script{
+    string constant NAME = "goDaddy";
+    string constant SYMBOL = "GG";
    
     NetworkConfig public activeNetworkConfig;
 
@@ -25,12 +27,12 @@ contract HelperConfig is Script{
     }
 
     function getSepoliaEthConfig() public pure returns(NetworkConfig memory) {
-        NetworkConfig memory sepoliaConfig = NetworkConfig("goDaddy", "GG");
+        NetworkConfig memory sepoliaConfig = NetworkConfig(NAME, SYMBOL);
         return sepoliaConfig; 
     }
 
     function getMainnetEthConfig() public pure returns(NetworkConfig memory) {
-        NetworkConfig memory ethConfig = NetworkConfig("goDaddy", "GG");
+        NetworkConfig memory ethConfig = NetworkConfig(NAME, SYMBOL);
         return ethConfig; 
     }
     // function getOrCreateAnvilEthConfig() public  returns(NetworkConfig memory) {
