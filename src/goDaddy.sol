@@ -6,12 +6,12 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 contract goDaddy is ERC721 {
     uint256 public max_supply;
     uint256 public total_supply;
-    address owner;
+    address public owner;
    
     struct Domain {
         string name;
         uint256 cost;
-        bool isOwner;
+        bool isOwned;
     }
     mapping (uint256 => Domain) public domains;
 
@@ -28,4 +28,14 @@ contract goDaddy is ERC721 {
         max_supply++;
         domains[max_supply] = Domain(_name, _cost, false);
     }
+    function mint(uint256 _id) public payable {
+        require(_id != 0, "Id > 0");
+        require(_id <= max_supply);
+        require(!domains[_id].isOwned,"Domain already owned!");
+        require(msg.value >= domains[_id].cost);
+        domains[_id].isOwned = true;
+        total_supply += 1 ;
+        _safeMint(msg.sender, _id);
+    }
+
 }
