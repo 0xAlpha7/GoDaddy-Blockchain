@@ -7,8 +7,7 @@ contract goDaddy is ERC721 {
     uint256 public max_supply;
     uint256 public total_supply;
     address owner;
-    string public name1 = "Domain";
-
+   
     struct Domain {
         string name;
         uint256 cost;
@@ -28,6 +27,5 @@ contract goDaddy is ERC721 {
         require(_cost > 0, "const will not be 0");
         max_supply++;
         domains[max_supply] = Domain(_name, _cost, false);
-        
     }
 }
