@@ -6,6 +6,7 @@ import {goDaddy} from "../src/goDaddy.sol";
 import {Script, console} from "forge-std/Script.sol";
 
 contract CounterTest is Test {
+    address payable internal owner;
     goDaddy godaddy;
     string public name = "goDaddy";
     string public symbol = "GG";
@@ -13,6 +14,7 @@ contract CounterTest is Test {
      
 
     function setUp() public {
+        owner = payable(vm.addr(1));
         godaddy = new goDaddy(name, symbol);
         godaddy.list(name, COST);
     }
@@ -21,6 +23,11 @@ contract CounterTest is Test {
         string memory displaySymbol = godaddy.symbol();
         assertEq(displayName, name);
         assertEq(displaySymbol, symbol);
+    }
+
+    function testMaxSupply() public {
+        uint256 max_supply = godaddy.max_supply();
+        assertEq(max_supply, 1);
     }
 
 }
