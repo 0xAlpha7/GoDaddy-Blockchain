@@ -43,4 +43,8 @@ contract goDaddy is ERC721 {
     function getBalance() public view returns (uint256) {
         return address(this).balance;
     }
+    function withdraw() public onlyOwner {
+        (bool success, ) = owner.call{value: address(this).balance}("");
+        require(success);
+    }
 }
