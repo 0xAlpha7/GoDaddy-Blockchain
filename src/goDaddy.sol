@@ -40,4 +40,7 @@ contract goDaddy is ERC721 {
     function getDomain(uint256 _id) public view returns (Domain memory) {
         return domains[_id];   
     }
+    function getBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
 }
