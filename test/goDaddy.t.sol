@@ -29,5 +29,9 @@ contract CounterTest is Test {
         uint256 max_supply = godaddy.max_supply();
         assertEq(max_supply, 1);
     }
+    function testTotalSupply() public {
+        uint256 max_supply = godaddy.total_supply();
+        assertEq(max_supply, 0);
+    }
 
 }
