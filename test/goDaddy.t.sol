@@ -6,17 +6,16 @@ import {goDaddy} from "../src/goDaddy.sol";
 import {Script, console} from "forge-std/Script.sol";
 
 contract CounterTest is Test {
-    address payable internal owner;
     goDaddy godaddy;
     string public name = "goDaddy";
     string public symbol = "GG";
+    string domainName = "www.gogogle.com";
     uint256 constant COST = 0.001 ether;
      
 
     function setUp() public {
-        owner = payable(vm.addr(1));
         godaddy = new goDaddy(name, symbol);
-        godaddy.list(name, COST);
+        godaddy.list(domainName, COST);
     }
     function testNameAndSymbol() public {
         string memory displayName = godaddy.name();
@@ -33,5 +32,12 @@ contract CounterTest is Test {
         uint256 max_supply = godaddy.total_supply();
         assertEq(max_supply, 0);
     }
+
+    function testDomain() public {
+        assertEq(godaddy.getDomain(1).cost, COST);
+        assertEq(godaddy.getDomain(1).isOwned, false);
+        assertEq(godaddy.getDomain(1).name, domainName);
+    }
+   
 
 }
