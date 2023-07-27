@@ -11,6 +11,7 @@ contract CounterTest is Test {
     string public symbol = "GG";
     string domainName = "www.gogogle.com";
     uint256 constant COST = 0.001 ether;
+    address public PLAYER = makeAddr("player");
      
 
     function setUp() public {
@@ -37,6 +38,14 @@ contract CounterTest is Test {
         assertEq(godaddy.getDomain(1).cost, COST);
         assertEq(godaddy.getDomain(1).isOwned, false);
         assertEq(godaddy.getDomain(1).name, domainName);
+    }
+
+    function testMint() public {
+        vm.prank(PLAYER);
+        uint256 ID = 1;
+        godaddy.list(domainName, COST);
+        // godaddy.mint{value: COST}(ID);
+        godaddy.getDomain(ID);
     }
    
 
