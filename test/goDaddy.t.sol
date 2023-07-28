@@ -41,15 +41,21 @@ contract CounterTest is Test {
     }
 
     function testMint() public {
-        // vm.prank(PLAYER);
-        // uint256 ID = 1;
-        // godaddy.list(domainName, COST);
+        vm.prank(PLAYER);
+        uint256 ID = 1;
+        godaddy.list(domainName, COST);
         godaddy.mint{value: COST}(1);
-        // godaddy.getDomain(ID);
-        // console.log("2");
-        // assertEq(godaddy.getDomain(ID).isOwned, true);
+        godaddy.getDomain(ID);
+        assertEq(godaddy.getDomain(ID).isOwned, true);
+    }
 
-        
+    function testWithdraw() public {
+        uint256 id = 1;
+        godaddy  = new goDaddy("goDaddy", "GOD");
+        godaddy.list(domainName, COST);
+        godaddy.mint{value: COST}(id);
+        godaddy.withdraw();
+        assert(godaddy.getBalance() == 0);
     }
    
 
