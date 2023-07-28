@@ -51,12 +51,20 @@ contract CounterTest is Test {
 
     function testWithdraw() public {
         uint256 id = 1;
-        godaddy  = new goDaddy("goDaddy", "GOD");
         godaddy.list(domainName, COST);
         godaddy.mint{value: COST}(id);
         godaddy.withdraw();
         assert(godaddy.getBalance() == 0);
     }
-   
-
+    function testWithdraw2() public {
+        uint256 id = 1;
+        godaddy.list(domainName, COST);
+        godaddy.mint{value: COST}(id);
+        // Try to withdraw the balance as a non-owner.
+        vm.prank(PLAYER);
+        godaddy.withdraw();
+        // Assert that the balance was not withdrawn.
+        assert(godaddy.getBalance() > 0);
+        
+    }
 }
