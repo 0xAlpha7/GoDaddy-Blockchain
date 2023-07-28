@@ -41,11 +41,15 @@ contract CounterTest is Test {
     }
 
     function testMint() public {
-        vm.prank(PLAYER);
-        uint256 ID = 1;
-        godaddy.list(domainName, COST);
-        // godaddy.mint{value: COST}(ID);
-        godaddy.getDomain(ID);
+        // vm.prank(PLAYER);
+        // uint256 ID = 1;
+        // godaddy.list(domainName, COST);
+        godaddy.mint{value: COST}(1);
+        // godaddy.getDomain(ID);
+        // console.log("2");
+        // assertEq(godaddy.getDomain(ID).isOwned, true);
+
+        
     }
    
 
