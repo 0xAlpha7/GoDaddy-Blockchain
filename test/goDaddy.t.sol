@@ -17,6 +17,7 @@ contract CounterTest is Test {
      
 
     function setUp() public {
+        vm.prank(PLAYER);
         godaddy = new goDaddy(name, symbol);
         godaddy.list(domainName, COST);  //return id = 1
         vm.deal(PLAYER, STARTING_BALANCE);
@@ -52,9 +53,9 @@ contract CounterTest is Test {
     }
 
     function testOwnerCanWithdraw() public {
-        uint256 id = 1;
-        godaddy.list(domainName, COST);
-        godaddy.mint{value: COST}(id);
+        vm.prank(PLAYER);
+        uint256 ID = 1;
+        godaddy.mint{value: COST}(ID);
         godaddy.withdraw();
         assert(godaddy.getBalance() == 0);
     }
