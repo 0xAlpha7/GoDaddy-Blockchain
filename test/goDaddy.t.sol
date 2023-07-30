@@ -74,15 +74,7 @@ contract CounterTest is Test {
     }
 
     function testWithdrawwithNoContractBalance() public {
-        uint256 id = 1;
-        godaddy.list(domainName, COST);
-        godaddy.mint{value: COST}(id);
-        // Transfer the balance out of the contract.
-        // contract.owner.transfer(contract.balance);
-        // Try to withdraw the balance.
-        // contract.withdraw();
-        // Assert that the withdraw failed.
-        // assert(contract.balance > 0);
-        
+        vm.expectRevert();
+        godaddy.withdraw();
     }
 }
