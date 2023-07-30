@@ -3,7 +3,8 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
 import {goDaddy} from "../src/goDaddy.sol";
-import {Script, console} from "forge-std/Script.sol";
+import {Script} from "forge-std/Script.sol";
+import {Test, console} from "forge-std/Test.sol";
 
 contract CounterTest is Test {
     goDaddy godaddy;
@@ -12,11 +13,13 @@ contract CounterTest is Test {
     string domainName = "www.gogogle.com";
     uint256 constant COST = 0.001 ether;
     address public PLAYER = makeAddr("player");
+    uint256 public constant STARTING_BALANCE = 10 ether;
      
 
     function setUp() public {
         godaddy = new goDaddy(name, symbol);
-        godaddy.list(domainName, COST);
+        godaddy.list(domainName, COST);  //return id = 1
+        vm.deal(PLAYER, STARTING_BALANCE);
     }
     function testNameAndSymbol() public {
         string memory displayName = godaddy.name();
@@ -42,11 +45,9 @@ contract CounterTest is Test {
 
     function testMint() public {
         vm.prank(PLAYER);
-        uint256 ID = 1;
-        godaddy.list(domainName, COST);
         godaddy.mint{value: COST}(1);
-        godaddy.getDomain(ID);
-        assertEq(godaddy.getDomain(ID).isOwned, true);
+        godaddy.getDomain(1);
+        assertEq(godaddy.getDomain(1).isOwned, true);
     }
 
     function testOwnerCanWithdraw() public {
