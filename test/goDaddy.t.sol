@@ -13,6 +13,8 @@ contract CounterTest is Test {
     string domainName = "www.gogogle.com";
     uint256 constant COST = 0.001 ether;
     address public PLAYER = makeAddr("player");
+    address public PLAYER2 = makeAddr("player2");
+
     uint256 public constant STARTING_BALANCE = 10 ether;
      
 
@@ -60,11 +62,11 @@ contract CounterTest is Test {
         assert(godaddy.getBalance() == 0);
     }
     function testWithdrawByNotOwner() public {
+        vm.prank(PLAYER);
         uint256 id = 1;
-        godaddy.list(domainName, COST);
         godaddy.mint{value: COST}(id);
         // Try to withdraw the balance as a non-owner.
-        vm.prank(PLAYER);
+        vm.prank(PLAYER2);
         vm.expectRevert();
         godaddy.withdraw();
         // Assert that the balance was not withdrawn.
