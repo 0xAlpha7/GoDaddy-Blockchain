@@ -45,9 +45,10 @@ contract CounterTest is Test {
 
     function testMint() public {
         vm.prank(PLAYER);
-        godaddy.mint{value: COST}(1);
-        godaddy.getDomain(1);
-        assertEq(godaddy.getDomain(1).isOwned, true);
+        uint256 ID = 1;
+        godaddy.mint{value: COST}(ID);
+        godaddy.getDomain(ID);
+        assertEq(godaddy.getDomain(ID).isOwned, true);
     }
 
     function testOwnerCanWithdraw() public {
